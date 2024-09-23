@@ -3,3 +3,4 @@ MNIST/
 cifar-10-python.tar.gz
 hymenoptera_data/
 cnn.pth
+runs/
