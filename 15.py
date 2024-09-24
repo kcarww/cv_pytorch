@@ -15,15 +15,19 @@ num_epochs = 2
 batch_size = 100
 learning_rate = 0.001
 
+
+transform = transforms.Compose([transforms.ToTensor(),
+                                transforms.Normalize((0.1307,), (0.3081,))])
+
 # MNIST dataset 
 train_dataset = torchvision.datasets.MNIST(root='./data', 
                                            train=True, 
-                                           transform=transforms.ToTensor(),  
+                                           transform=transform,  
                                            download=True)
 
 test_dataset = torchvision.datasets.MNIST(root='./data', 
                                           train=False, 
-                                          transform=transforms.ToTensor())
+                                          transform=transform)
 
 # Data loader
 train_loader = torch.utils.data.DataLoader(dataset=train_dataset, 
@@ -101,3 +105,6 @@ with torch.no_grad():
 
     acc = 100.0 * n_correct / n_samples
     print(f'Accuracy of the network on the 10000 test images: {acc} %')
+    
+    
+torch.save(model.state_dict(), "mnist_ffn.pth")
